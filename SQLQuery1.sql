@@ -13,6 +13,7 @@ CREATE TABLE [dbo].[Zoo] (
 CREATE TABLE [dbo].[Animal] (
     [Id]   INT           IDENTITY (1, 1) NOT NULL,
     [Name] NVARCHAR (50) NOT NULL,
+    [Description] NVARCHAR (50),
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
  
@@ -31,14 +32,14 @@ insert into dbo.Zoo values ('Berlin')
 insert into dbo.Zoo values ('Kairo')
 insert into dbo.Zoo values ('Milan')
 
-insert into dbo.Animal values ('Shark')
-insert into dbo.Animal values ('Clownfish')
-insert into dbo.Animal values ('Monkey')
-insert into dbo.Animal values ('Wolf')
-insert into dbo.Animal values ('Gecko')
-insert into dbo.Animal values ('Crocodile')
-insert into dbo.Animal values ('Owl')
-insert into dbo.Animal values ('Parrot')
+insert into dbo.Animal values ('Shark','Big Gray')
+insert into dbo.Animal values ('Clownfish','Funny Fish')
+insert into dbo.Animal values ('Monkey','')
+insert into dbo.Animal values ('Wolf','')
+insert into dbo.Animal values ('Gecko','')
+insert into dbo.Animal values ('Crocodile','')
+insert into dbo.Animal values ('Owl','')
+insert into dbo.Animal values ('Parrot','')
  
 insert into dbo.ZooAnimal values (1,1)
 insert into dbo.ZooAnimal values (1,2)

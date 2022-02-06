@@ -36,7 +36,7 @@ namespace ZooManagerNET
 
             SQLQueries(showAllzoos, "Location",ListZoos);
             SQLQueries(showAllAnimals, "Name",ListAddAnimalToZoo);
-            
+            ShowAnimalGrid();
         }
         private void SQLQueries(string query, string name, ListBox list)
         {
@@ -189,7 +189,7 @@ namespace ZooManagerNET
             sqlConnection.Open();
             sqlcmd.Parameters.AddWithValue("@zooID", ListZoos.SelectedValue);
             sqlcmd.Parameters.AddWithValue("@animalID", ListAddAnimalToZoo.SelectedValue);
-          
+          //TODO - CheckIFSelection is null
             sqlcmd.ExecuteReader();
             sqlConnection.Close();
             ShowAnimals();
@@ -218,6 +218,7 @@ namespace ZooManagerNET
             SqlCommand sqlcmd = new SqlCommand(query, sqlConnection);
             sqlConnection.Open();
             sqlcmd.Parameters.AddWithValue("@animalID", ListAnimal.SelectedValue);
+            sqlcmd.Parameters.AddWithValue("@zooID", ListZoos.SelectedValue);
 
             if (ListZoos.SelectedValue != null && ListAnimal.SelectedValue != null)
             {
@@ -226,7 +227,31 @@ namespace ZooManagerNET
             }
             sqlConnection.Close();
         }
-    }
 
+        private void ShowAnimalGrid()
+        {
+            try
+            {
+                string query = "select * from Animal a";
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(query, sqlConnection);
+                using (sqlDataAdapter)
+                {
+                    DataTable animalTable = new DataTable();
+                    sqlDataAdapter.Fill(animalTable);
+                    //list.DisplayMemberPath = name;
+                    // list.SelectedValuePath = "Id";
+                    //list.ItemsSource = animalTable.DefaultView;
+                    dataGrid.ItemsSource = animalTable.DefaultView;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+
+            }
+
+        }
+    }
    
+
 }
